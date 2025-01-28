@@ -183,6 +183,29 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+        .lucky-close-btn {
+            background: linear-gradient(45deg, #e31837, #ff4d4d);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lucky-close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(227, 24, 55, 0.4);
+        }
+
+        .lucky-close-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(227, 24, 55, 0.2);
+        }
+
 
         /* CSS cho mobile */
         @media (max-width: 768px) {
@@ -347,7 +370,6 @@
         <h2>Chúc mừng!</h2>
         <p id="luckyAmount"></p>
         <p id="luckyWish"></p>
-        <button class="btn" onclick="closeLuckyModal()">Đóng</button>
     </div>
 
     <script>
@@ -357,10 +379,10 @@
         
         // Danh sách lì xì và lời chúc
         const luckyPackets = [
-            { amount: '270,924đ', wish: 'Ngày này ko được quên nhe!' },
-            { amount: '270,924đ', wish: 'Quên hoài=)))) dm !' },
-            { amount: '270,924đ', wish: 'Lần sau mà ko nhớ thì=))!' },
-            { amount: '270,924đ', wish: 'Đố biết là ngày gì!' },
+            { amount: '27,924đ', wish: 'Ngày này ko được quên nhe!' },
+            { amount: '66,666đ', wish: 'Số may mắn!' },
+            { amount: '31,724đ', wish: 'Đậu đỏoo!' },
+            { amount: '27,724đ', wish: 'Ngày làm quen lại nè!' },
         ];
 
         // Khởi tạo EmailJS
@@ -424,14 +446,13 @@
             document.getElementById('luckyWish').textContent = lucky.wish;
             document.getElementById('luckyModal').style.display = 'block';
             document.getElementById('modalOverlay').style.display = 'block';
-
-            // Sử dụng savedWishText thay vì lấy lại từ textarea
-            sendNotification(savedWishText, lucky.amount, lucky.wish);
-        }
-
-        function closeLuckyModal() {
-            document.getElementById('luckyModal').style.display = 'none';
-            document.getElementById('modalOverlay').style.display = 'none';
+            
+            // Tạo nút đóng đẹp
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Bái bai! 🎊';
+            closeButton.className = 'lucky-close-btn';
+            closeButton.onclick = () => window.close();
+            document.getElementById('luckyModal').appendChild(closeButton);
         }
 
         // Gửi thông báo qua EmailJS
