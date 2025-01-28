@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Tết Người Yêu</title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "jWhgZuaGuJNDzj5tO",
+        });
+    })();
+    </script>
+    <style>
+        /* CSS cơ bản */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            color: #d4145a;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .btn {
+            background: #d4145a;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #ff1f6d;
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #d4145a;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #d4145a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        #luckyMoney {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .red-packet {
+            width: 60px;
+            height: 80px;
+            background: #d4145a;
+            position: absolute;
+            animation: fall linear forwards;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: gold;
+            font-size: 2rem;
+            pointer-events: auto;
+            z-index: 101;
+        }
+
+        .red-packet:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-100vh); }
+            to { transform: translateY(100vh); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* CSS cho mobile */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            textarea {
+                height: 100px;
+                font-size: 0.9rem;
+            }
+
+            .red-packet {
+                width: 40px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .modal {
+                width: 90%;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="tetMusic" loop>
+        <source src="/api/placeholder/400/320" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Trang loading -->
+        <div id="loading" class="page active">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Đang tải những điều bất ngờ...</p>
+            </div>
+        </div>
+
+        <!-- Trang 1: Lời chúc gia đình -->
+        <div id="page1" class="page">
+            <h1>Kính chúc gia đình</h1>
+            <p>
+                Năm mới con xin kính chúc gia đình mình một năm mới An Khang Thịnh Vượng, 
+                Vạn Sự Như Ý. Mong rằng năm mới sẽ mang đến cho gia đình mình thật nhiều 
+                niềm vui, sức khỏe và thành công. Con xin cảm ơn ba mẹ đã luôn tin tưởng, 
+                ủng hộ và yêu thương chúng con.
+            </p>
+            <button class="btn" onclick="nextPage()">Tiếp tục</button>
+        </div>
+
+        <!-- Trang 2: Lời chúc người yêu -->
+        <div id="page2" class="page">
+            <h1>Gửi người yêu thương</h1>
+            <p>
+                Anh/Em muốn nói với em/anh rằng, năm qua có em/anh bên cạnh là điều tuyệt vời nhất. 
+                Cảm ơn em/anh đã luôn ở bên, chia sẻ những khoảnh khắc vui buồn và là động lực để anh/em 
+                cố gắng mỗi ngày. Năm mới này, anh/em chúc em/anh luôn xinh đẹp/đẹp trai, hạnh phúc 
+                và gặt hái được nhiều thành công trong cuộc sống. Yêu em/anh nhiều!
+            </p>
+            <button class="btn" onclick="nextPage()">Tiếp tục</button>
+        </div>
+
+        <!-- Trang 3: Nhập lời chúc -->
+        <div id="page3" class="page">
+            <h1>Gửi lời chúc của bạn</h1>
+            <p>Hãy viết những điều bạn muốn gửi gắm nhé:</p>
+            <textarea id="wishText" placeholder="Viết lời chúc của bạn ở đây..."></textarea>
+            <button class="btn" onclick="handleWishSubmit()">Gửi lời chúc</button>
+        </div>
+
+        <!-- Trang 4: Lì xì -->
+        <div id="page4" class="page">
+            <h1>Mưa lì xì may mắn</h1>
+            <p>Hãy chọn một phong bao lì xì may mắn nhé!</p>
+            <div id="luckyMoney"></div>
+        </div>
+    </div>
+
+    <!-- Modal overlay -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Modal hiển thị lì xì -->
+    <div id="luckyModal" class="modal">
+        <h2>Chúc mừng!</h2>
+        <p id="luckyAmount"></p>
+        <p id="luckyWish"></p>
+        <button class="btn" onclick="closeLuckyModal()">Đóng</button>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = ['loading', 'page1', 'page2', 'page3', 'page4'];
+        const audio = document.getElementById('tetMusic');
+        
+        // Danh sách lì xì và lời chúc
+        const luckyPackets = [
+            { amount: '888,000đ', wish: 'Phát tài phát lộc!' },
+            { amount: '999,000đ', wish: 'Vạn sự như ý!' },
+            { amount: '668,000đ', wish: 'Lộc phát tài phát!' },
+            { amount: '868,000đ', wish: 'Phúc lộc đầy nhà!' },
+            { amount: '686,000đ', wish: 'Tiền vô như nước!' }
+        ];
+
+        // Khởi tạo EmailJS
+        emailjs.init("jWhgZuaGuJNDzj5tO"); // Thay YOUR_PUBLIC_KEY bằng public key của bạn từ EmailJS
+
+        // Khởi tạo trang
+        window.onload = function() {
+            setTimeout(() => {
+                nextPage();
+                audio.play().catch(() => {
+                    console.log('Autoplay prevented');
+                });
+            }, 5000);
+        };
+
+        // Chuyển trang
+        function nextPage() {
+            document.getElementById(pages[currentPage]).classList.remove('active');
+            currentPage++;
+            if (currentPage < pages.length) {
+                document.getElementById(pages[currentPage]).classList.add('active');
+                if (currentPage === 4) {
+                    startLuckyMoney();
+                }
+            }
+        }
+
+        // Tạo mưa lì xì
+        function startLuckyMoney() {
+            setInterval(createRedPacket, 1000);
+        }
+
+        function createRedPacket() {
+            const packet = document.createElement('div');
+            packet.className = 'red-packet';
+            packet.innerHTML = '🧧';
+            packet.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+            packet.style.animationDuration = Math.random() * 2 + 3 + 's';
+            
+            // Thêm sự kiện click trực tiếp vào element
+            packet.addEventListener('click', function() {
+                showLuckyMoney();
+                this.style.pointerEvents = 'none'; // Vô hiệu hóa click sau khi đã chọn
+            });
+            
+            document.getElementById('luckyMoney').appendChild(packet);
+
+            // Xóa packet sau khi rơi xong
+            setTimeout(() => {
+                packet.remove();
+            }, parseFloat(packet.style.animationDuration) * 1000);
+        }
+
+        // Hiển thị modal lì xì
+        function showLuckyMoney() {
+            const lucky = luckyPackets[Math.floor(Math.random() * luckyPackets.length)];
+            document.getElementById('luckyAmount').textContent = 'Bạn nhận được: ' + lucky.amount;
+            document.getElementById('luckyWish').textContent = lucky.wish;
+            document.getElementById('luckyModal').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+
+            // Sử dụng savedWishText thay vì lấy lại từ textarea
+            sendNotification(savedWishText, lucky.amount, lucky.wish);
+        }
+
+        function closeLuckyModal() {
+            document.getElementById('luckyModal').style.display = 'none';
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        // Gửi thông báo qua EmailJS
+        function sendNotification(wishText, luckyAmount, luckyWish) {
+            const templateParams = {
+                to_email: "phucvinh235371@gmail.com", // Thay bằng email của bạn
+                from_name: "Người yêu của bạn",
+                wish_text: wishText,
+                lucky_amount: luckyAmount,
+                lucky_wish: luckyWish,
+                time: new Date().toLocaleString()
+            };
+
+            emailjs.send('service_5s2n9mj', 'template_5dgzsvq', templateParams)
+                .then(function(response) {
+                    console.log('Success:', response.status, response.text);
+                }, function(error) {
+                    console.log('Failed:', error);
+                });
+        }
+        // Xử lý khi nhấn nút "Gửi lời chúc"
+        let savedWishText = '';
+
+        // Sửa hàm handleWishSubmit
+        function handleWishSubmit() {
+            savedWishText = document.getElementById('wishText').value;
+            if (!savedWishText.trim()) {
+                alert('Vui lòng nhập lời chúc!');
+                return;
+            }
+            sendNotification(savedWishText, '', ''); // Gửi lời chúc
+            nextPage(); // Chuyển trang
+        }
+    </script>
+</body>
+</html>
