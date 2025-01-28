@@ -39,7 +39,7 @@
         /* Điều chỉnh container để hài hòa với background */
         .container {
             max-width: 800px;
-            background: rgba(255, 255, 255, 0.8);  /* Tăng độ trong suốt */
+            background: rgba(255, 255, 255, 0.9);  /* Tăng độ trong suốt */
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -221,10 +221,70 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('tetMusic');
+            
+            // Auto play khi load trang
+            window.addEventListener('click', function() {
+                audio.play();
+            }, { once: true });
+            
+            // Thêm nút điều khiển nhạc
+            const musicControl = document.createElement('button');
+            musicControl.innerHTML = '🔊';
+            musicControl.className = 'music-control';
+            document.body.appendChild(musicControl);
+            
+            let isPlaying = false;
+            musicControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    musicControl.innerHTML = '🔈';
+                } else {
+                    audio.play();
+                    musicControl.innerHTML = '🔊';
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+        </script>
+        
+        <!-- Thay đổi phần audio -->
+        <audio id="tetMusic" loop>
+            <source src="hcmx.mp3" type="audio/mpeg">
+        </audio>
+        
+        <!-- Thêm style cho nút điều khiển nhạc -->
+        <style>
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #d4145a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: #ff1f6d;
+        }
+        </style>
 </head>
 <body>
     <audio id="tetMusic" loop>
-        <source src="/api/placeholder/400/320" type="audio/mpeg">
+        <source src="hcmx.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
@@ -232,7 +292,7 @@
         <div id="loading" class="page active">
             <div class="loading">
                 <div class="spinner"></div>
-                <p>Đang tải những điều bất ngờ...</p>
+                <p>Đang tải ...</p>
             </div>
         </div>
 
@@ -250,15 +310,15 @@
 
         <!-- Trang 2: Lời chúc người yêu -->
         <div id="page2" class="page">
-            <h1>Hehehehe</h1>
+            <h1>Gửi người tôi yêu</h1>
             <p>
                 Ờm trước hết thì năm cũ cũng đã qua rồi chuyện gì lỡ thì cũng đã xảy ra rồi 
                 Xin lỗi tôm vì có những lần mà pv hành xử không đúng cách. Và cũng cảm ơn 
-                tôm rất nhiều vì đã nói ra để cho pv hiểu rằng việc đó làm cho tôm cảm thấy
-                khó xử để lần sau không được phép tái phạm nữa. <br>
-                Nói chung là cảm ơn tôm rất nhiều, để nói ra lời chúc chắc dài lắm=]]] nên là
-                thôi nhe, chỉ mong rằng mọi điều tốt đẹp sẽ luôn đến với tôm thôi. <br>
-                Yêu Minh Thư, yêu Thư rất rất rất nhiều. Ăn tết vui vẻ nhe. Yêu:3
+                tôm rất nhiều vì đã nói ra để cho pv hiểu rằng việc đó khiến cho tôm cảm thấy
+                khó xử để rồi lần sau không được phép tái phạm nữa. <br> <br>
+                Nói chung là cảm ơn tôm rất nhiều, để nói ra lời chúc thì chắc chắc dài lắm=]]] nên là
+                thôi nhe, chỉ mong rằng mọi điều tốt đẹp sẽ luôn đến với tôm thôi. Thế nhe <br><br>
+                Yêu Minh Thư, yêu Minh Thư rất rất rất nhiều. Ăn tết vui vẻ nhe. Yêu:3
             </p>
             <button class="btn" onclick="nextPage()">Tiếp tục</button>
         </div>
@@ -267,14 +327,14 @@
         <div id="page3" class="page">
             <h1>Lời nhắn nhủ đến LatDat</h1>
             <p>Viết những điều tôm muốn gửi gắm nhé:3</p>
-            <textarea id="wishText" placeholder="Viết lời chúc của bạn ở đây..."></textarea>
+            <textarea id="wishText" placeholder="Viết lời chúc của em ở đây..."></textarea>
             <button class="btn" onclick="handleWishSubmit()">Gửi</button>
         </div>
 
         <!-- Trang 4: Lì xì -->
         <div id="page4" class="page">
             <h1>Mưa lì xì may mắn</h1>
-            <p>Hãy chọn một phong bao lì xì may mắn nhé!</p>
+            <p>Hãy chọn một phong bao lì xì may mắn!</p>
             <div id="luckyMoney"></div>
         </div>
     </div>
@@ -298,8 +358,8 @@
         // Danh sách lì xì và lời chúc
         const luckyPackets = [
             { amount: '270,924đ', wish: 'Ngày này ko được quên nhe!' },
-            { amount: '270,924đ', wish: 'Quên hoài=)) dm !' },
-            { amount: '270,924đ', wish: 'Lần sau hỏi mà ko nhớ thì=))!' },
+            { amount: '270,924đ', wish: 'Quên hoài=)))) dm !' },
+            { amount: '270,924đ', wish: 'Lần sau mà ko nhớ thì=))!' },
             { amount: '270,924đ', wish: 'Đố biết là ngày gì!' },
         ];
 
@@ -309,13 +369,16 @@
         // Khởi tạo trang
         window.onload = function() {
             setTimeout(() => {
+                // Chuyển sang trang chính
                 nextPage();
-                audio.play().catch(() => {
-                    console.log('Autoplay prevented');
-                });
-            }, 3000);
-        };
 
+                // Phát nhạc
+                const audio = document.getElementById('tetMusic');
+                audio.play().catch((error) => {
+                    console.log('Không thể phát nhạc tự động:', error);
+                });
+            }, 3000); // Đợi 3 giây
+        };
         // Chuyển trang
         function nextPage() {
             document.getElementById(pages[currentPage]).classList.remove('active');
@@ -338,7 +401,7 @@
             packet.className = 'red-packet';
             packet.innerHTML = '🧧';
             packet.style.left = Math.random() * (window.innerWidth - 60) + 'px';
-            packet.style.animationDuration = Math.random() * 2 + 3 + 's';
+            packet.style.animationDuration = Math.random() * 3 + 5 + 's';
             
             // Thêm sự kiện click trực tiếp vào element
             packet.addEventListener('click', function() {
