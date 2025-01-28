@@ -183,27 +183,51 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
-        .lucky-close-btn {
-            background: linear-gradient(45deg, #e31837, #ff4d4d);
-            color: white;
-            border: none;
+        .lucky-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .lucky-btn {
             padding: 12px 24px;
             border-radius: 25px;
             font-size: 16px;
-            margin-top: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+            border: none;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
-        .lucky-close-btn:hover {
+        .continue-btn {
+            background: linear-gradient(45deg, #ffd700, #ffaa00);
+            color: #800000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .close-btn {
+            background: linear-gradient(45deg, #e31837, #ff4d4d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+        }
+
+        .lucky-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(227, 24, 55, 0.4);
+            filter: brightness(110%);
         }
 
-        .lucky-close-btn:active {
+        .lucky-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 10px rgba(227, 24, 55, 0.2);
+            filter: brightness(95%);
+        }
+
+        .continue-btn:hover {
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .close-btn:hover {
+            box-shadow: 0 6px 20px rgba(227, 24, 55, 0.4);
         }
 
 
@@ -447,12 +471,34 @@
             document.getElementById('luckyModal').style.display = 'block';
             document.getElementById('modalOverlay').style.display = 'block';
             
-            // Tạo nút đóng đẹp
-            const closeButton = document.createElement('button');
-            closeButton.textContent = 'Bái bai! 🎊';
-            closeButton.className = 'lucky-close-btn';
-            closeButton.onclick = () => window.close();
-            document.getElementById('luckyModal').appendChild(closeButton);
+            // Kiểm tra xem container nút đã tồn tại chưa
+            let buttonContainer = document.querySelector('.lucky-buttons');
+            
+            // Nếu chưa có container thì mới tạo mới
+            if (!buttonContainer) {
+                buttonContainer = document.createElement('div');
+                buttonContainer.className = 'lucky-buttons';
+                
+                // Nút bốc tiếp
+                const continueButton = document.createElement('button');
+                continueButton.textContent = 'Bốc tiếp 🧧';
+                continueButton.className = 'lucky-btn continue-btn';
+                continueButton.onclick = () => {
+                    document.getElementById('luckyModal').style.display = 'none';
+                    document.getElementById('modalOverlay').style.display = 'none';
+                };
+                
+                // Nút đóng web
+                const closeButton = document.createElement('button');
+                closeButton.textContent = 'Chúc bạn năm mới an khang! 🎊';
+                closeButton.className = 'lucky-btn close-btn';
+                closeButton.onclick = () => window.close();
+                
+                // Thêm nút vào container
+                buttonContainer.appendChild(continueButton);
+                buttonContainer.appendChild(closeButton);
+                document.getElementById('luckyModal').appendChild(buttonContainer);
+            }
         }
 
         // Gửi thông báo qua EmailJS
