@@ -39,7 +39,7 @@
         /* Điều chỉnh container để hài hòa với background */
         .container {
             max-width: 800px;
-            background: rgba(255, 255, 255, 0.9); /* Tăng độ trong suốt */
+            background: rgba(255, 255, 255, 0.8);  /* Tăng độ trong suốt */
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -238,34 +238,37 @@
 
         <!-- Trang 1: Lời chúc gia đình -->
         <div id="page1" class="page">
-            <h1>Kính chúc gia đình</h1>
+            <h1>Xuân Ất Tỵ</h1>
             <p>
-                Năm mới con xin kính chúc gia đình mình một năm mới An Khang Thịnh Vượng, 
-                Vạn Sự Như Ý. Mong rằng năm mới sẽ mang đến cho gia đình mình thật nhiều 
-                niềm vui, sức khỏe và thành công. Con xin cảm ơn ba mẹ đã luôn tin tưởng, 
-                ủng hộ và yêu thương chúng con.
+                Lời đầu tiên xin gửi lời chúc đến gia đình tôm một năm một năm mới an khang, 
+                thịnh vượng và đầy ắp niềm vui. Mong rằng Tết này sẽ mang đến cho gia đình 
+                thật nhiều sức khỏe, hạnh phúc, và những khoảnh khắc ấm áp bên nhau. <br>
+                Chúc gia đình Minh Thư một cái Tết thật trọn vẹn và vui vẻ nhe!.
             </p>
             <button class="btn" onclick="nextPage()">Tiếp tục</button>
         </div>
 
         <!-- Trang 2: Lời chúc người yêu -->
         <div id="page2" class="page">
-            <h1>Gửi người yêu thương</h1>
+            <h1>Hehehehe</h1>
             <p>
-                Anh/Em muốn nói với em/anh rằng, năm qua có em/anh bên cạnh là điều tuyệt vời nhất. 
-                Cảm ơn em/anh đã luôn ở bên, chia sẻ những khoảnh khắc vui buồn và là động lực để anh/em 
-                cố gắng mỗi ngày. Năm mới này, anh/em chúc em/anh luôn xinh đẹp/đẹp trai, hạnh phúc 
-                và gặt hái được nhiều thành công trong cuộc sống. Yêu em/anh nhiều!
+                Ờm trước hết thì năm cũ cũng đã qua rồi chuyện gì lỡ thì cũng đã xảy ra rồi 
+                Xin lỗi tôm vì có những lần mà pv hành xử không đúng cách. Và cũng cảm ơn 
+                tôm rất nhiều vì đã nói ra để cho pv hiểu rằng việc đó làm cho tôm cảm thấy
+                khó xử để lần sau không được phép tái phạm nữa. <br>
+                Nói chung là cảm ơn tôm rất nhiều, để nói ra lời chúc chắc dài lắm=]]] nên là
+                thôi nhe, chỉ mong rằng mọi điều tốt đẹp sẽ luôn đến với tôm thôi. <br>
+                Yêu Minh Thư, yêu Thư rất rất rất nhiều. Ăn tết vui vẻ nhe. Yêu:3
             </p>
             <button class="btn" onclick="nextPage()">Tiếp tục</button>
         </div>
 
         <!-- Trang 3: Nhập lời chúc -->
         <div id="page3" class="page">
-            <h1>Gửi lời chúc của bạn</h1>
-            <p>Hãy viết những điều bạn muốn gửi gắm nhé:</p>
+            <h1>Lời nhắn nhủ đến LatDat</h1>
+            <p>Viết những điều tôm muốn gửi gắm nhé:3</p>
             <textarea id="wishText" placeholder="Viết lời chúc của bạn ở đây..."></textarea>
-            <button class="btn" onclick="handleWishSubmit()">Gửi lời chúc</button>
+            <button class="btn" onclick="handleWishSubmit()">Gửi</button>
         </div>
 
         <!-- Trang 4: Lì xì -->
@@ -294,15 +297,14 @@
         
         // Danh sách lì xì và lời chúc
         const luckyPackets = [
-            { amount: '888,000đ', wish: 'Phát tài phát lộc!' },
-            { amount: '999,000đ', wish: 'Vạn sự như ý!' },
-            { amount: '668,000đ', wish: 'Lộc phát tài phát!' },
-            { amount: '868,000đ', wish: 'Phúc lộc đầy nhà!' },
-            { amount: '686,000đ', wish: 'Tiền vô như nước!' }
+            { amount: '270,924đ', wish: 'Ngày này ko được quên nhe!' },
+            { amount: '270,924đ', wish: 'Quên hoài=)) dm !' },
+            { amount: '270,924đ', wish: 'Lần sau hỏi mà ko nhớ thì=))!' },
+            { amount: '270,924đ', wish: 'Đố biết là ngày gì!' },
         ];
 
         // Khởi tạo EmailJS
-        emailjs.init("jWhgZuaGuJNDzj5tO"); // Thay YOUR_PUBLIC_KEY bằng public key của bạn từ EmailJS
+        emailjs.init("jWhgZuaGuJNDzj5tO");
 
         // Khởi tạo trang
         window.onload = function() {
