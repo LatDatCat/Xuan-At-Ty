@@ -381,7 +381,7 @@
         <!-- Trang 4: Lì xì -->
         <div id="page4" class="page">
             <h1>Mưa lì xì may mắn</h1>
-            <p>Hãy chọn một phong bao lì xì may mắn!</p>
+            <p>Hãy chọn nhiều phong bao lì xì may mắn!</p>
             <div id="luckyMoney"></div>
         </div>
     </div>
@@ -403,10 +403,12 @@
         
         // Danh sách lì xì và lời chúc
         const luckyPackets = [
-            { amount: '27,924đ', wish: 'Ngày này ko được quên nhe!' },
+            { amount: '27,924đ', wish: 'Ngày này sau ko được quên nhe!' },
             { amount: '66,666đ', wish: 'Số mt thích hêh!' },
-            { amount: '31,724đ', wish: 'Đậu đỏoo!' },
+            { amount: '31,724đ', wish: 'Thất tịch đậu đỏooo!' },
             { amount: '27,724đ', wish: 'Ngày làm quen lại nè!' },
+            { amount: '33,333đ', wish: 'Quên ngày cãi nhau nên để tạm=))!' },
+            { amount: '29,125đ', wish: 'Chúc mừng năm mớiiii!' },
         ];
 
         // Khởi tạo EmailJS
@@ -481,7 +483,7 @@
                 
                 // Nút bốc tiếp
                 const continueButton = document.createElement('button');
-                continueButton.textContent = 'Bốc tiếp 🧧';
+                continueButton.textContent = 'Bốc tiếp (có 6 cái) 🧧';
                 continueButton.className = 'lucky-btn continue-btn';
                 continueButton.onclick = () => {
                     document.getElementById('luckyModal').style.display = 'none';
